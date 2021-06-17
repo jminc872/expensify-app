@@ -47,6 +47,19 @@ export const editExpense = (id, updates) => ({
   updates
 });
 
+// create startEditExpense call signature same as editExpense
+// test startEditExpense with "should edit expenses from firebase"
+// the startEditExpense in EditExpensePage instead of editExpense
+// Adjust EditExpensePage tests
+
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).update(updates).then(() => {
+      dispatch((editExpense(id, updates)))
+    })
+  }
+}
+
 // SET_EXPENSES
 
 export const setExpenses = (expenses) => ({
@@ -69,4 +82,3 @@ export const startSetExpenses = () => {
     })
   }
 }
-
